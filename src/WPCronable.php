@@ -62,7 +62,7 @@ abstract class WPCronable
             return;
         }
 
-        \wp_schedule_event(\strtotime("{$this->wp_cron_start} + {$interval['value']} seconds"), $interval['slug'], $this->wp_cron_name);
+        \wp_schedule_event(\strtotime($this->getCronStart()), $interval['slug'], $this->wp_cron_name);
     }
 
     public function unscheduleCron(): void
