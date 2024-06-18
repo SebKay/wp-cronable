@@ -16,7 +16,7 @@ jobs:
           php-version: 8.2
 
       - name: Install dependencies
-        run: composer build:dev
+        run: composer install
 
       - name: Validate against coding standards
         run: composer lint
