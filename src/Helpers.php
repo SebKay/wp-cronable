@@ -63,9 +63,16 @@ class Helpers
      */
     public static function getCronScheduleByTime(int $time): ?array
     {
-        return \collect(self::wpCronIntervals())
-            ->filter(function ($interval) use ($time) {
-                return $interval['value'] == $time;
+        return \collect(\wp_get_schedules())
+            ->filter(function ($schedule) use ($time) {
+                return $schedule['interval'] == $time;
+            })
+            ->map(function (array $schedule, string $key) {
+                return [
+                    'label' => $schedule['display'],
+                    'slug' => $key,
+                    'value' => $schedule['interval'],
+                ];
             })
             ->values()
             ->first();
